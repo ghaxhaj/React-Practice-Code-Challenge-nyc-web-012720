@@ -23,9 +23,10 @@ class App extends Component {
 
     let sushi = [...this.state.sushis]
     let selectedSushi = sushi.filter(sushi => sushi.id === id)
-    console.log(selectedSushi[0].price)
+
     if(this.state.money-selectedSushi[0].price < 0){
       console.log("You got no bread!")
+
     }else{
     this.setState({
       money: parseInt(this.state.money - selectedSushi[0].price),
@@ -35,10 +36,10 @@ class App extends Component {
 
 
   render() {
-    console.log(this.state.clickedSushi)
+
     return (
       <div className="app">
-        <SushiContainer sushi = {this.state.sushis} handleClick = {this.getClickedSushi}/>
+        <SushiContainer sushi = {this.state.sushis} eatenSushi = {this.state.clickedSushi} handleClick = {this.getClickedSushi}/>
         <Table sushi = {this.state.clickedSushi} money = {this.state.money} />
       </div>
     );

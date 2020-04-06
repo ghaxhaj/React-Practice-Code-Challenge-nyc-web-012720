@@ -13,8 +13,11 @@ class SushiContainer extends React.Component{
     if(this.props.sushi.length > 0){
       var fourSushi = this.props.sushi.slice(this.state.firstLimit,this.state.lastLimit)
       return fourSushi.map(sushi => {
-        return <Sushi key={sushi.id} handleClick = {this.props.handleClick} {...sushi} />
-      })
+        if(this.props.eatenSushi.filter(s => s.id === sushi.id).length > 0){
+          return <Sushi key={sushi.id} className = "eaten" {...sushi} />
+        }else{
+        return <Sushi key={sushi.id} className = "uneaten" handleClick = {this.props.handleClick} {...sushi} />
+      }})
     }
   }
 
