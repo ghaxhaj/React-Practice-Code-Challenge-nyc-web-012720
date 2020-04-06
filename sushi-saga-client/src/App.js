@@ -9,7 +9,8 @@ class App extends Component {
 
   state = {
     sushis: {sushis: []},
-    clickedSushi: []
+    clickedSushi: [], 
+    money: 25
   }
 
   componentDidMount(){
@@ -22,7 +23,14 @@ class App extends Component {
 
     let sushi = [...this.state.sushis]
     let selectedSushi = sushi.filter(sushi => sushi.id === id)
-    this.setState({clickedSushi: [...this.state.clickedSushi, selectedSushi]})
+    console.log(selectedSushi[0].price)
+    if(this.state.money-selectedSushi[0].price < 0){
+      console.log("You got no bread!")
+    }else{
+    this.setState({
+      money: parseInt(this.state.money - selectedSushi[0].price),
+      clickedSushi: [...this.state.clickedSushi, selectedSushi]})
+    }
   }
 
 
@@ -31,7 +39,7 @@ class App extends Component {
     return (
       <div className="app">
         <SushiContainer sushi = {this.state.sushis} handleClick = {this.getClickedSushi}/>
-        <Table sushi = {this.state.clickedSushi} />
+        <Table sushi = {this.state.clickedSushi} money = {this.state.money} />
       </div>
     );
   }
