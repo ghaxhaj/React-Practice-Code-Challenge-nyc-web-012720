@@ -8,20 +8,26 @@ const Table = (props) => {
     })
   }
 
+  const renderMoney = (array) => {
+    let money = 20
+    let total = array.map(object => {
+      return object[0].price}).reduce(function (a,b){return a + b}, 0)
+    console.log(total)
+    if(money - total < 0){
+      console.log("You got no bread left!")
+    }else{
+    return money - total
+  }}
+
   return (
     <Fragment>
       <h1 className="remaining">
-        You have: ${ /* Give me how much money I have left */ } remaining!
+        You have: ${renderMoney(props.sushi)} remaining!
       </h1>
       <div className="table">
         <div className="stack">
           {
-            /* 
-               renderPlates takes an array 
-               and renders an empty plate
-               for every element in the array
-            */
-            renderPlates([])
+            renderPlates(props.sushi)
           }
         </div>
       </div>
